@@ -1,3 +1,8 @@
 .nav {
   background-color: rgb(5, 5, 36);
 }
+
+.taskcard {
+  background-color: rgb(12, 12, 53);
+  box-shadow: rgb(35, 35, 63);
+}

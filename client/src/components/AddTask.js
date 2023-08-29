@@ -98,9 +98,10 @@ const AddTask = () => {
                     ref={priorityRef}
                     className="w-full bg-slate-100 bg-opacity-30 rounded-lg shadow-lg shadow-black  focus:border-black focus:bg-slate-50 focus:ring-2 focus:ring-slate-100 text-base outline-none text-black py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                   >
-                    <option value="High">High</option>
-                    <option value="Medium">Medium</option>
-                    <option value="Low">Low</option>
+                    <option>Select your priority</option>
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
                   </select>
                 </div>
               </div>

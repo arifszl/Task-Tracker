@@ -7,20 +7,21 @@ import { Avatar } from "@mui/material";
 import { Link } from "react-router-dom";
 const Header = () => {
   return (
-    <div className="text-3xl   flex justify-between items-center dis text-red-600 font-bold p-3 border-b-2 border-gray-500">
+    <div className="text-lg   flex justify-between items-center  text-red-600 font-bold p-1 border-b-2 border-gray-500">
       <div className="m-1 ">
         <Link to="/">
           <span>
-            <TaskAltIcon /> Task<span className="text-white">Tracker</span>
+            <TaskAltIcon /> Task<span className="text-gray-400">Tracker</span>
           </span>
         </Link>
       </div>
+
       <div className="outline-none">
         <h1 className="text-lg text-white flex items-center cursor-pointer">
           <NavLink to="/add">
             <Button>
               {" "}
-              <h1 className="text-white text-lg text-opacity-70 font-semibold hover:text-amber-50">
+              <h1 className="text-white  text-opacity-70 font-semibold hover:text-amber-50">
                 New Task
               </h1>
             </Button>{" "}
