@@ -14,6 +14,10 @@ const taskSchema = new Schema({
     type: String,
     enum: ["1", "2", "3"],
   },
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 const Task = mongoose.model("Task", taskSchema);

@@ -2,13 +2,18 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import taskRouter from "./router/task.js";
-
+import userRouter from "./router/user.js";
 import bodyParser from "body-parser";
-const app = express();
+import dotenv from "dotenv";
 
-app.use(express.json());
-app.use(bodyParser.json({ extended: true }));
+const app = express();
+dotenv.config();
+
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -16,7 +21,13 @@ app.use(
     credentials: true,
   }),
 );
-app.use("/", taskRouter);
+// app.post("/test", (req, res) => {
+//   console.log(req.body);
+//   res.json({ message: "test successful" });
+// });
+console.log(process.env.SECRET);
+app.use(taskRouter);
+app.use(userRouter);
 
 mongoose
   .connect("mongodb://0.0.0.0:27017/taskDb")
