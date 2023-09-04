@@ -57,10 +57,35 @@ router.get("/gettasks", isLoggedin, async (req, res) => {
   let tasks = await Task.find({ user_id });
   res.status(200).json(tasks);
 });
+//get particular task details from backend and set it modal
+
+router.get("/gettask/:id", isLoggedin, async (req, res) => {
+  let id = req.params.id;
+
+  const task = await Task.findById(id);
+
+  res.status(200).json(task);
+});
+
+router.put("/updatetask/:id", isLoggedin, async (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  let { title, date, status, description } = req.body;
+  const task = await Task.findOneAndUpdate(
+    { _id: id },
+    {
+      title: title,
+      date: date,
+      status: status,
+      description: description,
+    },
+  );
+  res.status(200).json({ message: "Task updated" });
+});
 
 router.delete("/deletetask/:id", isLoggedin, async (req, res) => {
   let id = req.params.id;
-  console.log(id);
+
   await Task.findByIdAndDelete(id);
   res.status(200).json({ message: "Task deleted" });
 });
