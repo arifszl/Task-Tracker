@@ -21,7 +21,11 @@ app.use(
     credentials: true,
   }),
 );
-
+// app.post("/test", (req, res) => {
+//   console.log(req.body);
+//   res.json({ message: "test successful" });
+// });
+console.log(process.env.SECRET);
 app.use(taskRouter);
 app.use(userRouter);
 
