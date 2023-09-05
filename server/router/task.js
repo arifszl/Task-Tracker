@@ -9,25 +9,23 @@ router.get("/search/:title", isLoggedin, async (req, res) => {
   const user_id = req.user._id;
   let titleSearch = req.params.title;
 
-  console.log(titleSearch);
-
   const rgx = (pattern) => new RegExp(`.*${pattern}.*`);
   const searchRgx = rgx(titleSearch);
   const tasks = await Task.find({
     $or: [{ title: { $regex: searchRgx, $options: "i" } }],
     user_id,
   });
-  console.log(tasks);
+
   res.status(200).json(tasks);
 });
 
 router.get("/sort/:sort", isLoggedin, async (req, res) => {
   const user_id = req.user._id;
   let sort = req.params.sort;
-  console.log(sort);
+
   if (sort === "Date") {
     const tasks = await Task.find({ user_id }).sort({ date: 1 });
-    console.log(tasks);
+
     res.status(200).json(tasks);
   } else if (sort === "Priority") {
     const tasks = await Task.find({ user_id }).sort({ priority: 1 });
@@ -69,7 +67,7 @@ router.get("/gettask/:id", isLoggedin, async (req, res) => {
 
 router.put("/updatetask/:id", isLoggedin, async (req, res) => {
   let id = req.params.id;
-  console.log(id);
+
   let { title, date, status, description } = req.body;
   const task = await Task.findOneAndUpdate(
     { _id: id },
