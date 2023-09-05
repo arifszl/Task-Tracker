@@ -2,6 +2,7 @@ import React from "react";
 
 import { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const AddTask = () => {
   const navigate = useNavigate();
@@ -9,12 +10,14 @@ const AddTask = () => {
   const descRef = useRef("");
   const dateRef = useRef("");
   const priorityRef = useRef("");
-
+  const user = useSelector((state) => state.user);
   let sendFormData = async (formData) => {
     let response = await fetch("http://localhost:8000/addtask", {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
+        //sending token to backend for verification
+        Authorization: `Bearer ${user.token}`,
       },
       body: JSON.stringify(formData),
       credentials: "include",
@@ -25,13 +28,18 @@ const AddTask = () => {
 
   const formHandler = async (e) => {
     e.preventDefault();
+    if (!user) {
+      alert("Please login to add task");
+      navigate("/login");
+      return;
+    }
     let formData = {
       title: taskRef.current.value,
       date: dateRef.current.value,
       priority: priorityRef.current.value,
       description: descRef.current.value,
     };
-    console.log(formData);
+
     let response = await sendFormData(formData);
 
     if (response.status === 200) {

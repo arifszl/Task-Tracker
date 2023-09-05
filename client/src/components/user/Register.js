@@ -23,7 +23,6 @@ const Register = () => {
       credentials: "include",
     });
     const data = await response.json();
-    console.log(data);
 
     //setting user
     if (!response.ok) {
@@ -44,7 +43,7 @@ const Register = () => {
       email: emailRef.current.value,
       password: passwordRef.current.value,
     };
-    console.log(formData);
+
     let response = await sendFormData(formData);
 
     if (response.status === 200) {

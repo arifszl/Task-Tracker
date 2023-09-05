@@ -8,13 +8,25 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import { Provider } from "react-redux";
 
-import taskReducer from "./store/Store";
+import taskReducer from "./store/TaskSlice";
+import userReducer from "./store/UserSlice";
+import { combineReducers } from "redux";
+
+const rootReducer = combineReducers({
+  tasks: taskReducer,
+  user: userReducer,
+});
 
 const store = configureStore({
-  reducer: {
-    tasks: taskReducer,
-  },
+  reducer: rootReducer,
 });
+
+// const store = configureStore({
+//   reducer: {
+//     tasks: taskReducer,
+
+//   },
+// });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

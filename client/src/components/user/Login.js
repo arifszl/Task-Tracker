@@ -23,12 +23,9 @@ const Login = () => {
     });
     const data = await response.json();
 
-    //setting user
-    console.log(response.ok);
-
     if (response.ok) {
       localStorage.setItem("user", JSON.stringify(data));
-      // console.log(data);
+
       dispatch(setUser(data));
     }
     if (!response.ok) {
