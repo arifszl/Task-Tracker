@@ -19,21 +19,19 @@ const userSchema = new Schema({
 //create static signup method
 
 userSchema.statics.signup = async function (email, password) {
-  console.log("inside signup");
-
   //validaation
 
   if (!email || !password) {
     throw new Error("Email and Password are required");
   }
 
-  //   if (!validator.isEmail(email)) {
-  //     throw new Error("Invalid Email");
-  //   }
+  if (!validator.isEmail(email)) {
+    throw new Error("Invalid Email");
+  }
 
-  //   if (!validator.isStrongPassword(password)) {
-  //     throw new Error("Password is not strong enough");
-  //   }
+  if (!validator.isStrongPassword(password)) {
+    throw new Error("Password is not strong enough");
+  }
 
   const existingUser = await this.findOne({ email });
   if (existingUser) {
